@@ -1,4 +1,7 @@
 from typing import List
+
+from fastapi import HTTPException, status
+
 from app.repositories.task_repository import TaskRepository
 from app.models.task import Task
 
@@ -13,7 +16,7 @@ class TaskService:
     def get_task(self, task_id: int) -> Task:
         task = self.repository.get_task(task_id)
         if not task:
-            raise Exception("Task not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")
         return task
 
     def get_all_tasks(self) -> List[Task]:

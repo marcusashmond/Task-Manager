@@ -13,7 +13,7 @@ class TaskRepository:
             INSERT INTO tasks (title, description, completed, created_at)
             VALUES (%s, %s, %s, %s)
         """
-        cursor.execute(query, (title, description, False, datetime.utcnow()))
+        cursor.execute(query, (title, description, False, datetime.now(datetime.UTC)))
         self.db.commit()
         task_id = cursor.lastrowid
         cursor.close()
